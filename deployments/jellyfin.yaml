@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jellyfin
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      volumes:
+      - name: jellyfin-config
+        persistentVolumeClaim:
+          claimName: jellyfin-config-claim
+      - name: jellyfin-cache
+        persistentVolumeClaim:
+          claimName: jellyfin-cache-claim
+      - name: jellyfin-data
+        persistentVolumeClaim:
+          claimName: nfs-claim
+      containers:
+      - env:
+          - name: TZ
+            value: America/Los_Angeles
+        image: linuxserver/jellyfin:10.8.4
+        name: jellfyin
+        ports:
+        - containerPort: 8096
+          name: http-tcp
+          protocol: TCP
+        - containerPort: 8920
+          name: https-tcp
+          protocol: TCP
+        - containerPort: 1900
+          name: dlna-udp
+          protocol: UDP
+        - containerPort: 7359
+          name: discovery-udp
+          protocol: UDP
+        volumeMounts:
+        - mountPath: /config
+          name: jellyfin-config
+        - mountPath: /cache
+          name: jellyfin-cache
+        - mountPath: /data
+          name: jellyfin-data
+      restartPolicy: Always

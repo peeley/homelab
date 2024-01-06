@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: jellyfin-ingress
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`watch.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: jellyfin-service
+      port: jellyfin-http
+  tls:
+    certResolver: myresolver

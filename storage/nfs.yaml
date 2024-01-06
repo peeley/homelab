@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 8Ti
+  nfs:
+    path: /volume1/Media
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+

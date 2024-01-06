@@ -1,0 +1,21 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    additionalArguments:
+      - --api.insecure
+      - --accesslog
+      - --providers.kubernetescrd
+      - --certificatesresolvers.myresolver.acme.dnschallenge.provider=digitalocean
+      - --certificatesresolvers.myresolver.acme.dnschallenge.resolvers=1.1.1.1:53
+      - --certificatesresolvers.myresolver.acme.email=noah.snelson@proton.me
+      - --certificatesresolvers.myresolver.acme.storage=/data/acme.json
+    env:
+      - name: DO_AUTH_TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: digitalocean-auth-token
+            key: token
