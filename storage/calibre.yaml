@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: calibre-books
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 8Ti
+  nfs:
+    path: /volume1/Media/Books
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: calibre-config
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  nfs:
+    path: /volume1/Media/Lab/calibre/config
+    server: hesiod.lab.janissary.xyz
+    readOnly: false

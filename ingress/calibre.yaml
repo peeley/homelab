@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: calibre-ingress
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`library.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: calibre-service
+      port: calibre-http
+  tls:
+    certResolver: myresolver

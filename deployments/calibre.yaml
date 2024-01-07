@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calibre-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: calibre
+  template:
+    metadata:
+      labels:
+        app: calibre
+    spec:
+      volumes:
+      - name: calibre-config
+        persistentVolumeClaim:
+          claimName: calibre-config-claim
+      - name: calibre-books
+        persistentVolumeClaim:
+          claimName: calibre-books-claim
+      containers:
+      - env:
+          - name: TZ
+            value: America/Los_Angeles
+          - name: PUID
+            value: "1024"
+          - name: PGID
+            value: "100"
+        image: lscr.io/linuxserver/calibre-web:latest
+        name: calibre
+        ports:
+        - containerPort: 8083
+          name: http-tcp
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /config
+          name: calibre-config
+        - mountPath: /books
+          name: calibre-books
+      restartPolicy: Always
