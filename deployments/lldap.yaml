@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lldap-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lldap
+  template:
+    metadata:
+      labels:
+        app: lldap
+    spec:
+      volumes:
+      - name: lldap-data
+        persistentVolumeClaim:
+          claimName: lldap-data-claim
+      containers:
+      - env:
+          - name: TZ
+            value: America/Los_Angeles
+          - name: UID
+            value: "1024"
+          - name: GID
+            value: "100"
+        image: nitnelave/lldap:latest
+        name: lldap
+        ports:
+        - containerPort: 3890
+          name: ldap
+          protocol: TCP
+        - containerPort: 17170
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /data
+          name: lldap-data
+      restartPolicy: Always

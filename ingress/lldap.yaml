@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: lldap-ingress
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`ldap.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: lldap-service
+      port: lldap-http
+  tls:
+    certResolver: myresolver
