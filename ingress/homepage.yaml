@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: homepage
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`home.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: homepage
+      port: http
+  tls:
+    certResolver: myresolver
