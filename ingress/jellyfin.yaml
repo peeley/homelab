@@ -2,6 +2,20 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: jellyfin-ingress
+  labels:
+    app.kubernetes.io/name: jellyfin
+  annotations:
+    gethomepage.dev/href: "https://watch.lab.janissary.xyz"
+    gethomepage.dev/icon: "jellyfin.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Media Server
+    gethomepage.dev/group: Media
+    gethomepage.dev/name: Jellyfin
+    gethomepage.dev/pod-selector: ""
+    gethomepage.dev/widget.type: "jellyfin"
+    gethomepage.dev/widget.url: "https://watch.lab.janissary.xyz"
+    # gethomepage.dev/widget.key: "" TODO figure out how to grab this value from secret
+    gethomepage.dev/widget.enableBlocks: "true"
 spec:
   entryPoints:
     - web
@@ -10,7 +24,7 @@ spec:
   - match: Host(`watch.lab.janissary.xyz`)
     kind: Rule
     services:
-    - name: jellyfin-service
+    - name: jellyfin
       port: jellyfin-http
   tls:
     certResolver: myresolver
