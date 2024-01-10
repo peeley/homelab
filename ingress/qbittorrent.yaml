@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: qbittorrent-ingress
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`torrents.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: qbittorrent-service
+      port: qbittorrent-http
+  tls:
+    certResolver: myresolver
