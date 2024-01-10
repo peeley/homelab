@@ -9,10 +9,7 @@ data:
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: ""
-  services.yaml: |
-    - Media
-    - Monitoring
-    - infra
+  services.yaml: ""
   widgets.yaml: |
     - kubernetes:
         cluster:
