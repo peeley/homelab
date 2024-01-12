@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: uptime-kuma-data
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Mi
+  nfs:
+    path: /volume1/Media/Lab/uptime-kuma/
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: uptime-kuma-data-claim
+spec:
+  storageClassName: nfs
+  volumeName: uptime-kuma-data
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Mi

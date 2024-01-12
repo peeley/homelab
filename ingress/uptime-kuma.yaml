@@ -1,0 +1,27 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: uptime-kuma-ingress
+  annotations:
+    gethomepage.dev/href: "https://uptime.lab.janissary.xyz"
+    gethomepage.dev/icon: "uptime-kuma.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Uptime Monitor
+    gethomepage.dev/group: Infra
+    gethomepage.dev/name: Uptime Kuma
+    gethomepage.dev/pod-selector: ""
+    gethomepage.dev/widget.type: "uptimekuma"
+    gethomepage.dev/widget.url: "https://uptime.lab.janissary.xyz"
+    gethomepage.dev/widget.slug: "home"
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`uptime.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: uptime-kuma-service
+      port: uptime-kuma-http
+  tls:
+    certResolver: myresolver
