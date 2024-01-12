@@ -9,7 +9,16 @@ data:
   custom.css: ""
   custom.js: ""
   bookmarks.yaml: ""
-  services.yaml: ""
+  services.yaml: |
+    - Infra:
+        - PiHole:
+            href: http://192.168.1.137/admin
+            description: Ad-blocking DNS server
+            icon: "pi-hole.png"
+        - Synology:
+            href: http://hesiod.lab.janissary.xyz:5000
+            description: NFS Storage
+            icon: "synology.png"
   widgets.yaml: |
     - kubernetes:
         cluster:
