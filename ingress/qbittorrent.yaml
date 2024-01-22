@@ -2,6 +2,18 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: qbittorrent-ingress
+  annotations:
+    gethomepage.dev/href: "https://qbittorrent.lab.janissary.xyz"
+    gethomepage.dev/icon: "qbittorrent.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Torrent Client
+    gethomepage.dev/group: Infra
+    gethomepage.dev/name: qBittorrent
+    gethomepage.dev/pod-selector: ""
+    gethomepage.dev/widget.type: "qbittorrent"
+    gethomepage.dev/widget.url: "https://torrents.lab.janissary.xyz"
+    # gethomepage.dev/widget.username: "" TODO figure out how to grab this value from secret
+    # gethomepage.dev/widget.password: ""
 spec:
   entryPoints:
     - web
