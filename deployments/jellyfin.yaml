@@ -28,6 +28,10 @@ spec:
       - env:
           - name: TZ
             value: America/Los_Angeles
+          - name: PUID
+            value: "1024"
+          - name: PGID
+            value: "100"
         image: linuxserver/jellyfin:10.8.4
         name: jellfyin
         ports:
