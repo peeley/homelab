@@ -4,11 +4,15 @@ metadata:
   name: miniflux-ingress
   annotations:
     gethomepage.dev/href: "https://reader.lab.janissary.xyz"
+    gethomepage.dev/icon: "miniflux.png"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: RSS Reader
     gethomepage.dev/group: Media
-    gethomepage.dev/name: RSS
+    gethomepage.dev/name: Miniflux
     gethomepage.dev/pod-selector: ""
+    gethomepage.dev/widget.type: "miniflux"
+    gethomepage.dev/widget.url: "https://reader.lab.janissary.xyz"
+    # gethomepage.dev/widget.key: "" TODO figure out how to grab this value from secret
 spec:
   entryPoints:
     - web
