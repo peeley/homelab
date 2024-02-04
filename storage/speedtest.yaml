@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: speedtest-config
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  nfs:
+    path: /volume1/Media/Lab/speedtest/
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: speedtest-config-claim
+spec:
+  storageClassName: nfs
+  volumeName: speedtest-config
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi

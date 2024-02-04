@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: speedtest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: speedtest
+  template:
+    metadata:
+      labels:
+        app: speedtest
+    spec:
+      volumes:
+      - name: speedtest-config
+        persistentVolumeClaim:
+          claimName: speedtest-config-claim
+      containers:
+      - env:
+          - name: PUID
+            value: "1024"
+          - name: PGID
+            value: "100"
+          - name: DB_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: speedtest
+                key: username
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: speedtest
+                key: password
+          - name: DB_DATABASE
+            value: speedtest
+          - name: DB_CONNECTION
+            value: pgsql
+          - name: DB_HOST
+            value: "postgres"
+        image: ghcr.io/alexjustesen/speedtest-tracker:latest
+        name: speedtest
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+      restartPolicy: Always

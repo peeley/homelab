@@ -1,0 +1,26 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: speedtest-ingress
+  annotations:
+    gethomepage.dev/href: "https://speed.lab.janissary.xyz"
+    gethomepage.dev/icon: "speedtest-tracker.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Network Speed Tests
+    gethomepage.dev/group: Infra
+    gethomepage.dev/name: Speedtest
+    gethomepage.dev/pod-selector: ""
+    gethomepage.dev/widget.type: "speedtest"
+    gethomepage.dev/widget.url: "https://speed.lab.janissary.xyz"
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`speed.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: speedtest
+      port: speedtest-http
+  tls:
+    certResolver: myresolver
