@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      volumes:
+      - name: postgres-data
+        persistentVolumeClaim:
+          claimName: postgres-data-claim
+      containers:
+      - env:
+          - name: TZ
+            value: America/Los_Angeles
+          - name: PUID
+            value: "1024"
+          - name: PGID
+            value: "100"
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: postgres-creds
+                key: username
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-creds
+                key: password
+          - name: PGDATA
+            # required to work around NFS permissions
+            value: /var/lib/postgresql/data/pgdata
+        image: postgres:latest
+        name: postgres
+        ports:
+        - containerPort: 5432
+          name: sql
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgres-data
+      restartPolicy: Always
