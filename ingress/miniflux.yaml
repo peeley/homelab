@@ -1,0 +1,23 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: miniflux-ingress
+  annotations:
+    gethomepage.dev/href: "https://reader.lab.janissary.xyz"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: RSS Reader
+    gethomepage.dev/group: Media
+    gethomepage.dev/name: RSS
+    gethomepage.dev/pod-selector: ""
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`reader.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: miniflux
+      port: miniflux-http
+  tls:
+    certResolver: myresolver

@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miniflux
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: miniflux
+  template:
+    metadata:
+      labels:
+        app: miniflux
+    spec:
+      containers:
+      - env:
+          - name: DATABASE_URL
+            valueFrom:
+              secretKeyRef:
+                name: miniflux
+                key: database-url
+          - name: ADMIN_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: miniflux
+                key: username
+          - name: ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: miniflux
+                key: password
+          - name: CREATE_ADMIN
+            value: "1"
+          - name: RUN_MIGRATIONS
+            value: "1"
+          - name: BASE_URL
+            value: https://reader.lab.janissary.xyz
+          - name: OAUTH2_PROVIDER
+            value: oidc
+          - name: OAUTH2_CLIENT_ID
+            value: miniflux
+          - name: OAUTH2_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: miniflux
+                key: oidc-client-secret
+          - name: OAUTH2_REDIRECT_URL
+            value: https://reader.lab.janissary.xyz/oauth2/oidc/callback
+          - name: OAUTH2_OIDC_DISCOVERY_ENDPOINT
+            value: https://auth.janissary.xyz
+          - name: OAUTH2_USER_CREATION
+            value: "1"
+        image: docker.io/miniflux/miniflux:latest
+        name: miniflux
+        ports:
+        - containerPort: 8080
+          name: http-tcp
+          protocol: TCP
+      restartPolicy: Always
