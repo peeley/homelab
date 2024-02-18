@@ -22,6 +22,11 @@ spec:
             value: "1024"
           - name: PGID
             value: "100"
+          - name: APP_KEY
+            valueFrom:
+              secretKeyRef:
+                name: speedtest
+                key: encryption_key
           - name: DB_USERNAME
             valueFrom:
               secretKeyRef:
