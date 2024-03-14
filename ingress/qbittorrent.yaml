@@ -3,7 +3,7 @@ kind: IngressRoute
 metadata:
   name: qbittorrent-ingress
   annotations:
-    gethomepage.dev/href: "https://qbittorrent.lab.janissary.xyz"
+    gethomepage.dev/href: "https://torrents.lab.janissary.xyz"
     gethomepage.dev/icon: "qbittorrent.png"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Torrent Client
