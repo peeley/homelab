@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: radarr
+spec:
+  selector:
+    app: radarr
+  type: NodePort
+  ports:
+  - name: radarr-http
+    protocol: TCP
+    port: 80
+    targetPort: http

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      volumes:
+        - name: radarr-config
+          persistentVolumeClaim:
+            claimName: radarr-config-claim
+        - name: radarr-data
+          persistentVolumeClaim:
+            claimName: nfs-claim
+      containers:
+        - name: radarr
+          image: hotio/radarr:release
+          env:
+            - name: TZ
+              value: "America/Los_Angeles"
+            - name: PUID
+              value: "1024"
+            - name: PGID
+              value: "100"
+          ports:
+            - containerPort: 7878
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: radarr-config
+            - mountPath: /data
+              name: radarr-data

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prowlarr
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+    spec:
+      volumes:
+        - name: prowlarr-config
+          persistentVolumeClaim:
+            claimName: prowlarr-config-claim
+        - name: prowlarr-data
+          persistentVolumeClaim:
+            claimName: nfs-claim
+      containers:
+        - name: prowlarr
+          image: hotio/prowlarr:release
+          env:
+            - name: TZ
+              value: "America/Los_Angeles"
+            - name: PUID
+              value: "1024"
+            - name: PGID
+              value: "100"
+          ports:
+            - containerPort: 9696
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: prowlarr-config
+            - mountPath: /data
+              name: prowlarr-data

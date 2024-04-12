@@ -58,5 +58,5 @@ spec:
           volumeMounts:
           - mountPath: /config
             name: qbittorrent-config
-          - mountPath: /downloads
+          - mountPath: /data
             name: qbittorrent-data
