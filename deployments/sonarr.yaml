@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      volumes:
+        - name: sonarr-config
+          persistentVolumeClaim:
+            claimName: sonarr-config-claim
+        - name: sonarr-data
+          persistentVolumeClaim:
+            claimName: nfs-claim
+      containers:
+        - name: sonarr
+          image: hotio/sonarr:release
+          env:
+            - name: TZ
+              value: "America/Los_Angeles"
+            - name: PUID
+              value: "1024"
+            - name: PGID
+              value: "100"
+          ports:
+            - containerPort: 8989
+              name: http
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /config
+              name: sonarr-config
+            - mountPath: /data
+              name: sonarr-data

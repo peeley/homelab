@@ -1,17 +1,17 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: radarr
+  name: sonarr
   annotations:
-    gethomepage.dev/href: "https://radarr.lab.janissary.xyz"
-    gethomepage.dev/icon: "radarr.png"
+    gethomepage.dev/href: "https://sonarr.lab.janissary.xyz"
+    gethomepage.dev/icon: "sonarr.png"
     gethomepage.dev/enabled: "true"
-    gethomepage.dev/description: Automated movie tracking
+    gethomepage.dev/description: Automated TV show tracking
     gethomepage.dev/group: Infra
-    gethomepage.dev/name: radarr
+    gethomepage.dev/name: sonarr
     gethomepage.dev/pod-selector: ""
-    # gethomepage.dev/widget.type: "radarr"
-    # gethomepage.dev/widget.url: "https://radarr.lab.janissary.xyz"
+    # gethomepage.dev/widget.type: "sonarr"
+    # gethomepage.dev/widget.url: "https://sonarr.lab.janissary.xyz"
     # gethomepage.dev/widget.key: "" TODO figure out how to grab this value from secret
     # gethomepage.dev/widget.enableQueue: true
 spec:
@@ -19,10 +19,10 @@ spec:
     - web
     - websecure
   routes:
-  - match: Host(`radarr.lab.janissary.xyz`)
+  - match: Host(`sonarr.lab.janissary.xyz`)
     kind: Rule
     services:
-    - name: radarr
-      port: radarr-http
+    - name: sonarr
+      port: sonarr-http
   tls:
     certResolver: myresolver
