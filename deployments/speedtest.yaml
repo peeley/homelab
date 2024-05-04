@@ -43,7 +43,7 @@ spec:
             value: pgsql
           - name: DB_HOST
             value: "postgres"
-        image: ghcr.io/alexjustesen/speedtest-tracker:latest
+        image: lscr.io/linuxserver/speedtest-tracker:latest
         name: speedtest
         ports:
         - containerPort: 80
