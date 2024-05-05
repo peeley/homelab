@@ -1,0 +1,28 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: readarr
+  annotations:
+    gethomepage.dev/href: "https://readarr.lab.janissary.xyz"
+    gethomepage.dev/icon: "readarr.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Automated eBook sourcing and tracking
+    gethomepage.dev/group: Infra
+    gethomepage.dev/name: readarr
+    gethomepage.dev/pod-selector: ""
+    # gethomepage.dev/widget.type: "readarr"
+    # gethomepage.dev/widget.url: "https://readarr.lab.janissary.xyz"
+    # gethomepage.dev/widget.key: "" TODO figure out how to grab this value from secret
+    # gethomepage.dev/widget.enableQueue: true
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`readarr.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: readarr
+      port: readarr-http
+  tls:
+    certResolver: myresolver

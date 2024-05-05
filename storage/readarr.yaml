@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: readarr-config
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Mi
+  nfs:
+    path: /volume1/Media/Lab/readarr/
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: readarr-config-claim
+spec:
+  storageClassName: nfs
+  volumeName: readarr-config
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Mi
