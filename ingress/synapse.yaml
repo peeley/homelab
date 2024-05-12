@@ -1,0 +1,24 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: synapse
+  annotations:
+    gethomepage.dev/href: "https://chat.lab.janissary.xyz"
+    gethomepage.dev/icon: "synapse.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Matrix server for chat
+    gethomepage.dev/group: Media
+    gethomepage.dev/name: synapse
+    gethomepage.dev/pod-selector: ""
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`chat.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: synapse
+      port: synapse-http
+  tls:
+    certResolver: myresolver

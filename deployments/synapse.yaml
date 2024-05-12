@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: synapse
+  labels:
+    app.kubernetes.io/name: synapse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: synapse
+  template:
+    metadata:
+      labels:
+        app: synapse
+    spec:
+      volumes:
+      - name: synapse-config
+        persistentVolumeClaim:
+          claimName: synapse-config-claim
+      containers:
+      - env:
+          - name: TZ
+            value: America/Los_Angeles
+          - name: UID
+            value: "1024"
+          - name: GID
+            value: "100"
+          - name: SYNAPSE_CONFIG_DIR
+            value: /data
+          - name: SYNAPSE_REPORT_STATS
+            value: "yes"
+          - name: SYNAPSE_SERVER_NAME
+            value: janissary.xyz
+        image: ghcr.io/element-hq/synapse
+        name: synapse
+        ports:
+        - containerPort: 8008
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /data
+          name: synapse-config
+      restartPolicy: Always
