@@ -29,3 +29,33 @@ spec:
     path: /volume1/Media/Lab/jellyfin/config
     server: hesiod.lab.janissary.xyz
     readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jellyfin-cache-claim
+spec:
+  storageClassName: nfs
+  volumeName: jellyfin-cache
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jellyfin-config-claim
+spec:
+  storageClassName: nfs
+  volumeName: jellyfin-config
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi

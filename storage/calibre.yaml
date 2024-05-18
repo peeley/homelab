@@ -29,3 +29,33 @@ spec:
     path: /volume1/Media/Lab/calibre/config
     server: hesiod.lab.janissary.xyz
     readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: calibre-books-claim
+spec:
+  storageClassName: nfs
+  volumeName: calibre-books
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 8Ti
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: calibre-config-claim
+spec:
+  storageClassName: nfs
+  volumeName: calibre-config
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi

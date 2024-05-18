@@ -13,3 +13,17 @@ spec:
     server: hesiod.lab.janissary.xyz
     readOnly: false
 
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-claim
+spec:
+  storageClassName: nfs
+  volumeName: nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 8Ti
