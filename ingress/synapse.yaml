@@ -4,7 +4,7 @@ metadata:
   name: synapse
   annotations:
     gethomepage.dev/href: "https://chat.lab.janissary.xyz"
-    gethomepage.dev/icon: "synapse.png"
+    gethomepage.dev/icon: "matrix-synapse.png"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Matrix server for chat
     gethomepage.dev/group: Media

@@ -7,7 +7,7 @@ metadata:
     gethomepage.dev/icon: "readarr.png"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Automated eBook sourcing and tracking
-    gethomepage.dev/group: Infra
+    gethomepage.dev/group: Downloads
     gethomepage.dev/name: readarr
     gethomepage.dev/pod-selector: ""
     # gethomepage.dev/widget.type: "readarr"

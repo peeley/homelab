@@ -7,7 +7,7 @@ metadata:
     gethomepage.dev/icon: "radarr.png"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Automated movie tracking
-    gethomepage.dev/group: Infra
+    gethomepage.dev/group: Downloads
     gethomepage.dev/name: radarr
     gethomepage.dev/pod-selector: ""
     # gethomepage.dev/widget.type: "radarr"

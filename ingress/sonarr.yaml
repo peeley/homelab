@@ -7,7 +7,7 @@ metadata:
     gethomepage.dev/icon: "sonarr.png"
     gethomepage.dev/enabled: "true"
     gethomepage.dev/description: Automated TV show tracking
-    gethomepage.dev/group: Infra
+    gethomepage.dev/group: Downloads
     gethomepage.dev/name: sonarr
     gethomepage.dev/pod-selector: ""
     # gethomepage.dev/widget.type: "sonarr"
