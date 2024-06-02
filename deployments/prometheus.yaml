@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus
+  labels:
+    app.kubernetes.io/name: prometheus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+  template:
+    metadata:
+      labels:
+        app: prometheus
+    spec:
+      volumes:
+      - name: prometheus-config
+        configMap:
+          name: prometheus
+      - name: prometheus-data
+        persistentVolumeClaim:
+          claimName: prometheus-data-claim
+      containers:
+      - env:
+          - name: TZ
+            value: America/Los_Angeles
+          - name: UID
+            value: "1024"
+          - name: GID
+            value: "100"
+        image: prom/prometheus
+        name: prometheus
+        ports:
+        - containerPort: 9090
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/prometheus/prometheus.yml
+          name: prometheus-config
+          subPath: prometheus.yaml
+        - mountPath: /prometheus
+          name: prometheus-data
+      restartPolicy: Always

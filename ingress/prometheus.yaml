@@ -1,0 +1,26 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus
+  annotations:
+    gethomepage.dev/href: "https://prometheus.lab.janissary.xyz"
+    gethomepage.dev/icon: "prometheus.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Time-series metrics database
+    gethomepage.dev/group: Metrics
+    gethomepage.dev/name: Prometheus
+    gethomepage.dev/pod-selector: ""
+    gethomepage.dev/widget.type: "prometheus"
+    gethomepage.dev/widget.url: "https://prometheus.lab.janissary.xyz"
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`prometheus.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: prometheus
+      port: prometheus-http
+  tls:
+    certResolver: myresolver

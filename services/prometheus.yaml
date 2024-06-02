@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+spec:
+  selector:
+    app: prometheus
+  type: NodePort
+  ports:
+  - name: prometheus-http
+    protocol: TCP
+    port: 80
+    nodePort: 30475
+    targetPort: http
