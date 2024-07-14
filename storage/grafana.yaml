@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: grafana-config
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  nfs:
+    path: /volume1/Media/Lab/grafana/config/
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grafana-config-claim
+spec:
+  storageClassName: nfs
+  volumeName: grafana-config
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: grafana-data
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  nfs:
+    path: /volume1/Media/Lab/grafana/data/
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grafana-data-claim
+spec:
+  storageClassName: nfs
+  volumeName: grafana-data
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi

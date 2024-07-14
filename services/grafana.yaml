@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+spec:
+  selector:
+    app: grafana
+  type: NodePort
+  ports:
+  - name: grafana-http
+    protocol: TCP
+    port: 80
+    targetPort: http

@@ -1,0 +1,26 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana
+  annotations:
+    gethomepage.dev/href: "https://grafana.lab.janissary.xyz"
+    gethomepage.dev/icon: "grafana.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Metrics monitoring and dashboards
+    gethomepage.dev/group: Metrics
+    gethomepage.dev/name: Grafana
+    gethomepage.dev/pod-selector: ""
+    gethomepage.dev/widget.type: "grafana"
+    gethomepage.dev/widget.url: "https://grafana.lab.janissary.xyz"
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`grafana.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: grafana
+      port: grafana-http
+  tls:
+    certResolver: myresolver
