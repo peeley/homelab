@@ -17,7 +17,7 @@ spec:
   - match: Host(`ldap.lab.janissary.xyz`)
     kind: Rule
     services:
-    - name: lldap-service
+    - name: lldap
       port: lldap-http
   tls:
     certResolver: myresolver
