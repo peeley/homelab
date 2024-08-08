@@ -8,6 +8,7 @@ spec:
     additionalArguments:
       - --api.insecure
       - --accesslog
+      - --log.level=DEBUG
       - --providers.kubernetescrd
       - --certificatesresolvers.myresolver.acme.dnschallenge.provider=digitalocean
       - --certificatesresolvers.myresolver.acme.dnschallenge.resolvers=1.1.1.1:53
