@@ -1646,7 +1646,7 @@ data:
   ldap.toml: |
     [[servers]]
     # Ldap server host (specify multiple hosts space separated)
-    host = "lldap-service"
+    host = "lldap"
     # Default port is 389 or 636 if use_ssl = true
     port = 3890
     # Set to true if LDAP server should use an encrypted TLS connection (either with STARTTLS or LDAPS)
