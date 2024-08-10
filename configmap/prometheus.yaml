@@ -32,4 +32,8 @@ data:
         # scheme defaults to 'http'.
 
         static_configs:
-          - targets: ["localhost:9090"]
+          - targets:
+              - "thoth.lab.janissary.xyz:9000"
+              - "heracles.lab.janissary.xyz:9000"
+              - "ixion.lab.janissary.xyz:9000"
+              - "athena.lab.janissary.xyz:9000"
