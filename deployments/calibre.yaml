@@ -27,7 +27,7 @@ spec:
             value: "1024"
           - name: PGID
             value: "100"
-        image: lscr.io/linuxserver/calibre-web:latest
+        image: linuxserver/calibre-web:0.6.23
         name: calibre
         ports:
         - containerPort: 8083
