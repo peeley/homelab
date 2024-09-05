@@ -38,4 +38,5 @@ data:
               - "ixion.lab.janissary.xyz:9000"
               - "athena.lab.janissary.xyz:9000"
               - "anubis.lab.janissary.xyz:9000"
+              - "osiris.lab.janissary.xyz:9000"
               - "kube-state-metrics:8080"
