@@ -1,0 +1,13 @@
+repositories:
+- name: sealed-secrets
+  url: https://bitnami-labs.github.io/sealed-secrets
+- name: longhorn
+  url: https://charts.longhorn.io
+
+releases:
+- name: sealed-secrets
+  namespace: kube-system
+  chart: sealed-secrets/sealed-secrets
+- name: longhorn
+  namespace: longhorn-system
+  chart: longhorn/longhorn
