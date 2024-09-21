@@ -1,61 +1,25 @@
 apiVersion: v1
-kind: PersistentVolume
+kind: PersistentVolumeClaim
 metadata:
   name: jellyfin-cache
 spec:
-  storageClassName: nfs
+  storageClassName: longhorn
   accessModes:
     - ReadWriteMany
-  capacity:
-    storage: 1Gi
-  nfs:
-    path: /volume1/Media/Lab/jellyfin/cache
-    server: hesiod.lab.janissary.xyz
-    readOnly: false
+  resources:
+    requests:
+      storage: 1Gi
 
 ---
 
 apiVersion: v1
-kind: PersistentVolume
+kind: PersistentVolumeClaim
 metadata:
   name: jellyfin-config
 spec:
-  storageClassName: nfs
-  accessModes:
-    - ReadWriteMany
-  capacity:
-    storage: 1Gi
-  nfs:
-    path: /volume1/Media/Lab/jellyfin/config
-    server: hesiod.lab.janissary.xyz
-    readOnly: false
-
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: jellyfin-cache-claim
-spec:
-  storageClassName: nfs
-  volumeName: jellyfin-cache
+  storageClassName: longhorn
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi
-
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: jellyfin-config-claim
-spec:
-  storageClassName: nfs
-  volumeName: jellyfin-config
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 1Gi
+      storage: 8Gi

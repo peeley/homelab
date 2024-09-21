@@ -1,0 +1,26 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: longhorn-ingress
+  namespace: longhorn-system
+  annotations:
+    gethomepage.dev/href: "https://longhorn.lab.janissary.xyz"
+    gethomepage.dev/icon: "longhorn.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Distributed storage backend
+    gethomepage.dev/group: Infra
+    gethomepage.dev/name: Longhorn
+    gethomepage.dev/pod-selector: ""
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`longhorn.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: longhorn-frontend
+      namespace: longhorn-system
+      port: http
+  tls:
+    certResolver: myresolver

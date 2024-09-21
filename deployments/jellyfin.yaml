@@ -17,10 +17,10 @@ spec:
       volumes:
       - name: jellyfin-config
         persistentVolumeClaim:
-          claimName: jellyfin-config-claim
+          claimName: jellyfin-config
       - name: jellyfin-cache
         persistentVolumeClaim:
-          claimName: jellyfin-cache-claim
+          claimName: jellyfin-cache
       - name: jellyfin-data
         persistentVolumeClaim:
           claimName: nfs-claim
