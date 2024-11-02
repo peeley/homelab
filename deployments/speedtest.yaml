@@ -43,6 +43,12 @@ spec:
             value: pgsql
           - name: DB_HOST
             value: "postgres"
+          - name: SPEEDTEST_SCHEDULE
+            value: "0 * * * *"
+          - name: APP_TIMEZONE
+            value: "America/Los_Angeles"
+          - name: DISPLAY_TIMEZONE
+            value: "America/Los_Angeles"
         image: lscr.io/linuxserver/speedtest-tracker:latest
         name: speedtest
         ports:
