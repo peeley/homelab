@@ -32,7 +32,7 @@ spec:
             value: "yes"
           - name: SYNAPSE_SERVER_NAME
             value: janissary.xyz
-        image: ghcr.io/element-hq/synapse
+        image: matrixdotorg/synapse:1.118
         name: synapse
         ports:
         - containerPort: 8008
