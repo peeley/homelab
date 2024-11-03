@@ -47,7 +47,7 @@ spec:
             protocol: TCP
           # TODO maybe add firewalled port
         - name: qbittorrent
-          image: lscr.io/linuxserver/qbittorrent:latest
+          image: lscr.io/linuxserver/qbittorrent:5.0.1
           env:
             - name: TZ
               value: "America/Los_Angeles"
