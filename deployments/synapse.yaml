@@ -32,7 +32,7 @@ spec:
             value: "yes"
           - name: SYNAPSE_SERVER_NAME
             value: janissary.xyz
-        image: matrixdotorg/synapse:1.118
+        image: matrixdotorg/synapse:v1.118.0
         name: synapse
         ports:
         - containerPort: 8008
