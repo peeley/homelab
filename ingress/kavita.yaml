@@ -1,0 +1,28 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kavita-ingress
+  annotations:
+    gethomepage.dev/href: "https://kavita.lab.janissary.xyz"
+    gethomepage.dev/icon: "kavita.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: (New) eBook Library
+    gethomepage.dev/group: Media
+    gethomepage.dev/name: Kavita
+    gethomepage.dev/pod-selector: ""
+    gethomepage.dev/widget.type: "kavita"
+    gethomepage.dev/widget.url: "https://kavita.lab.janissary.xyz"
+    # gethomepage.dev/widget.username: "" TODO figure out how to grab this value from secret
+    # gethomepage.dev/widget.password: ""
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`kavita.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: kavita-service
+      port: kavita-http
+  tls:
+    certResolver: myresolver

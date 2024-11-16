@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kavita
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kavita
+  template:
+    metadata:
+      labels:
+        app: kavita
+    spec:
+      volumes:
+      - name: kavita-config
+        persistentVolumeClaim:
+          claimName: kavita-config-claim
+      - name: kavita-data
+        persistentVolumeClaim:
+          claimName: nfs-claim
+      containers:
+      - env:
+          - name: TZ
+            value: America/Los_Angeles
+          - name: PUID
+            value: "1024"
+          - name: PGID
+            value: "100"
+        image: linuxserver/kavita:0.8.3
+        name: kavita
+        ports:
+        - containerPort: 5000
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /config
+          name: kavita-config
+        - mountPath: /data
+          name: kavita-data
+      restartPolicy: Always

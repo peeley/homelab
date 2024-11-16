@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kavita-service
+spec:
+  selector:
+    app: kavita
+  type: NodePort
+  ports:
+  - name: kavita-http
+    protocol: TCP
+    port: 80
+    targetPort: http
