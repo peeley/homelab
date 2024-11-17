@@ -11,3 +11,6 @@ releases:
 - name: longhorn
   namespace: longhorn-system
   chart: longhorn/longhorn
+  set:
+    - name: defaultSettings.backupTarget
+      value: nfs://hesiod.lab.janissary.xyz:/volume1/Media/Lab/backups
