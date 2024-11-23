@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: home-assistant
+data:
+  configuration.yaml: |
+    # Configure a default setup of Home Assistant (frontend, api, etc)
+    default_config:
+
+    automation: !include automations.yaml
+    script: !include scripts.yaml
+    scene: !include scenes.yaml
+
+    # Nginx Proxy stuff
+    http:
+      base_url: https://jarvis.lab.janissary.xyz
+      server_port: 8123
+      # For extra security set this to only accept connections on localhost if NGINX is on the same machine
+      # Uncommenting this will mean that you can only reach Home Assistant using the proxy, not directly via IP from other clients.
+      #server_host: 127.0.0.1
+      use_x_forwarded_for: true
+      # You must set the trusted proxy IP address so that Home Assistant will properly accept connections
+      # Set this to your NGINX machine IP, or localhost if hosted on the same machine.
+      trusted_proxies:
+        - 0.0.0.0/0

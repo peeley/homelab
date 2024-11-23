@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: home-assistant
+  labels:
+    app.kubernetes.io/name: home-assistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: home-assistant
+  template:
+    metadata:
+      labels:
+        app: home-assistant
+    spec:
+      volumes:
+      - name: configuration-file
+        configMap:
+          name: home-assistant
+      - name: home-assistant-config
+        persistentVolumeClaim:
+          claimName: home-assistant-config-claim
+      containers:
+      - env:
+          - name: TZ
+            value: America/Los_Angeles
+          - name: UID
+            value: "1024"
+          - name: GID
+            value: "100"
+        image: ghcr.io/home-assistant/home-assistant:2024.11
+        name: home-assistant
+        ports:
+        - containerPort: 8123
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /config
+          name: home-assistant-config
+        - mountPath: /config/configuration.yaml
+          name: configuration-file
+          subPath: configuration.yaml
+      restartPolicy: Always

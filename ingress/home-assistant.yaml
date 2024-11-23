@@ -1,0 +1,28 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: home-assistant-ingress
+  annotations:
+    gethomepage.dev/href: "https://jarvis.lab.janissary.xyz"
+    gethomepage.dev/icon: "home-assistant.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Smart home automation hub
+    gethomepage.dev/group: Media
+    gethomepage.dev/name: HomeAssistant
+    gethomepage.dev/pod-selector: ""
+    gethomepage.dev/widget.type: "home-assistant"
+    gethomepage.dev/widget.url: "https://jarvis.lab.janissary.xyz"
+    # gethomepage.dev/widget.username: "" TODO figure out how to grab this value from secret
+    # gethomepage.dev/widget.password: ""
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`jarvis.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: home-assistant-service
+      port: home-assistant-http
+  tls:
+    certResolver: myresolver
