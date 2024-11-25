@@ -10,8 +10,8 @@ metadata:
     gethomepage.dev/group: Media
     gethomepage.dev/name: HomeAssistant
     gethomepage.dev/pod-selector: ""
-    gethomepage.dev/widget.type: "home-assistant"
-    gethomepage.dev/widget.url: "https://jarvis.lab.janissary.xyz"
+    # gethomepage.dev/widget.type: "homeassistant"
+    # gethomepage.dev/widget.url: "https://jarvis.lab.janissary.xyz"
     # gethomepage.dev/widget.username: "" TODO figure out how to grab this value from secret
     # gethomepage.dev/widget.password: ""
 spec:
