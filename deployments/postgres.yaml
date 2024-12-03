@@ -37,7 +37,7 @@ spec:
           - name: PGDATA
             # required to work around NFS permissions
             value: /var/lib/postgresql/data/pgdata
-        image: postgres:latest
+        image: postgres:16
         name: postgres
         ports:
         - containerPort: 5432
