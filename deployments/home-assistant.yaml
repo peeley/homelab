@@ -21,6 +21,11 @@ spec:
       - name: home-assistant-config
         persistentVolumeClaim:
           claimName: home-assistant-config-claim
+      - name: zigbee-hardware
+        hostPath:
+          path: /dev/ttyUSB0
+      nodeSelector:
+        zigbee: "true"
       containers:
       - env:
           - name: TZ
@@ -41,4 +46,8 @@ spec:
         - mountPath: /config/configuration.yaml
           name: configuration-file
           subPath: configuration.yaml
+        - mountPath: /dev/ttyUSB0
+          name: zigbee-hardware
+        securityContext:
+          privileged: true
       restartPolicy: Always
