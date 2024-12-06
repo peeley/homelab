@@ -35,9 +35,9 @@ spec:
                   name: gluetun-wireguard-private-key
                   key: key
             - name: WIREGUARD_ADDRESSES
-              value: "10.67.43.154/32"
-            # - name: FIREWALL_VPN_INPUT_PORTS
-            #   value: "51820"
+              value: "10.66.48.213/32"
+            - name: FIREWALL_VPN_INPUT_PORTS
+              value: "51820"
           securityContext:
             capabilities:
               add: ["NET_ADMIN"]

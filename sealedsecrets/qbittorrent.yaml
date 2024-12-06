@@ -1,0 +1,16 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: gluetun-wireguard-private-key
+  namespace: default
+spec:
+  encryptedData:
+    key: AgBFkNMaJMwCAd04ONCh2Ue5RDQ3x5uSjUaUB1pMnt5eEnnsaFOxl8g2Yea4rNUTUfku6RwnTmi+YB2r3Aj6dVWd62eD59AyfiNO2koX51Pp9Yx/Gk0qOqXDnGxBodf+FFUflXTaLAiStDlZvNq0EycTP1G2rhtVul21avPAP2BoFiocSmxL4g6gfFlE1ZisjZVje1wKVwPG+rZQle7sMh/2taP3SHsGiS/7kMkeaV45EezbH/5caAtzk+OWqFpXSf4qmbUfzHVRl/64PQhgYmj1E2Q1UyU65J5AJwvaNNSdyqdUy7C4sZE9Xak1CzKWFczsxA/8qg/WAXP2RtnYC1RtkwHflN8NabQeBzag443Urv0cY81KrcQn4J1m64d51cQqkf7vg0c1O5jl21MoIfFBpluj0lLDrsDEwaELmn4UzkmMmcejJwvBdDuGvGecyLpVFlh/5vrs364G2JeB37UvRS9NZklOzUEZOr0QI9kyZzuoL06iDOGE6BYvQh85iiRLpFbsB6xbaF0yRtehtZkv9/43XpCjt2Ei3yCN9IqY/dfynahZ6x0BTeUjxn+Ar9Tjm+XO1MAj/txO+wqDY4NpekWTGuD1THd9f1/d2Lcz7TMD+7uuXCpwa8kUoTw5pw4hISLGa41T0yNG17ZAlYjFPVM/38WH99OVMASzPgenlFLM+8utupWJEyBII7UvBscu2RHIWlocrCA5D86PPfgj7QcyjfQ18JADXhd+4zrQrTtV20iiVv029bM9+wQ=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: gluetun-wireguard-private-key
+      namespace: default
+    type: Opaque
