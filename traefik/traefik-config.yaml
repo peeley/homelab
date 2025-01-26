@@ -14,6 +14,8 @@ spec:
       - --certificatesresolvers.myresolver.acme.dnschallenge.resolvers=1.1.1.1:53
       - --certificatesresolvers.myresolver.acme.email=noah.snelson@proton.me
       - --certificatesresolvers.myresolver.acme.storage=/data/acme.json
+      - --entrypoints.web.address=:80
+      - --entrypoints.web.http.redirections.entryPoint.to=websecure
       - --entrypoints.websecure.http.tls=true
       - --entrypoints.websecure.http.tls.certResolver=myresolver
       - --entrypoints.websecure.http.tls.domains[0].main=lab.janissary.xyz

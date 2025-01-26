@@ -35,9 +35,11 @@ spec:
                   name: gluetun-wireguard-private-key
                   key: key
             - name: WIREGUARD_ADDRESSES
-              value: "10.66.48.213/32"
+              value: "10.67.71.187/32"
             - name: FIREWALL_VPN_INPUT_PORTS
               value: "51820"
+            - name: SERVER_CITIES
+              value: "Tirana"
           securityContext:
             capabilities:
               add: ["NET_ADMIN"]
