@@ -21,25 +21,40 @@ spec:
             claimName: nfs-claim
       containers:
         - name: gluetun
-          image: ghcr.io/qdm12/gluetun:latest
+          image: ghcr.io/qdm12/gluetun:v3.40.0
           env:
             - name: TZ
               value: "America/Los_Angeles"
             - name: VPN_TYPE
               value: "wireguard"
             - name: VPN_SERVICE_PROVIDER
-              value: "mullvad"
+              value: "airvpn"
             - name: WIREGUARD_PRIVATE_KEY
               valueFrom:
                 secretKeyRef:
-                  name: gluetun-wireguard-private-key
+                  name: gluetun
                   key: key
+            - name: WIREGUARD_PRESHARED_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: gluetun
+                  key: preshared
             - name: WIREGUARD_ADDRESSES
-              value: "10.67.71.187/32"
+              valueFrom:
+                secretKeyRef:
+                  name: gluetun
+                  key: addr
             - name: FIREWALL_VPN_INPUT_PORTS
-              value: "51820"
-            - name: SERVER_CITIES
-              value: "Tirana"
+              valueFrom:
+                secretKeyRef:
+                  name: gluetun
+                  key: port
+            - name: FIREWALL_DEBUG
+              value: "true"
+            - name: DNS_ADDRESS
+              value: "1.1.1.1"
+            - name: FIREWALL_OUTBOUND_SUBNETS
+              value: "10.42.0.0/15"
           securityContext:
             capabilities:
               add: ["NET_ADMIN"]
@@ -47,9 +62,8 @@ spec:
           - containerPort: 8080
             name: http
             protocol: TCP
-          # TODO maybe add firewalled port
         - name: qbittorrent
-          image: lscr.io/linuxserver/qbittorrent:5.0.1
+          image: lscr.io/linuxserver/qbittorrent:5.0.3
           env:
             - name: TZ
               value: "America/Los_Angeles"
