@@ -1,0 +1,27 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: jellyseerr
+  annotations:
+    gethomepage.dev/href: "https://jellyseerr.lab.janissary.xyz"
+    gethomepage.dev/icon: "jellyseerr.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Automated media requests
+    gethomepage.dev/group: Downloads
+    gethomepage.dev/name: jellyseerr
+    gethomepage.dev/pod-selector: ""
+    gethomepage.dev/widget.type: "jellyseerr"
+    gethomepage.dev/widget.url: "https://jellyseerr.lab.janissary.xyz"
+    # gethomepage.dev/widget.key: "" TODO figure out how to grab this value from secret
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`jellyseerr.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: jellyseerr
+      port: jellyseerr-http
+  tls:
+    certResolver: myresolver
