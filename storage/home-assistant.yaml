@@ -1,11 +1,29 @@
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: home-assistant-config
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Mi
+  nfs:
+    path: /volume1/Media/Lab/home-assistant/
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: home-assistant-config-claim
 spec:
-  storageClassName: longhorn
+  storageClassName: nfs
+  volumeName: home-assistant-config
   accessModes:
     - ReadWriteMany
   resources:
     requests:
-      storage: 4Gi
+      storage: 1Mi
