@@ -37,9 +37,9 @@ data:
               - "heracles.lab.janissary.xyz:9000"
               - "ixion.lab.janissary.xyz:9000"
               - "athena.lab.janissary.xyz:9000"
-              - "192.168.1.117:9153" # coredns
-              - "192.168.1.117:9154" # coredns
-              - "192.168.1.117:9155" # coredns
+              - "athena.lab.janissary.xyz:9153" # coredns
+              - "athena.lab.janissary.xyz:9154" # coredns
+              - "athena.lab.janissary.xyz:9155" # coredns
               - "anubis.lab.janissary.xyz:9000"
               - "osiris.lab.janissary.xyz:9000"
               - "kube-state-metrics:8080"
