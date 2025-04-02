@@ -8,18 +8,61 @@ spec:
     - ReadWriteMany
   resources:
     requests:
-      storage: 2Gi
+      storage: 1Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  finalizers:
+  - kubernetes.io/pv-protection
+  name: jellyfin-config
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 8Gi
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: jellyfin-config
+    namespace: default
+  csi:
+    driver: driver.longhorn.io
+    fsType: ext4
+    volumeAttributes:
+      diskSelector: ""
+      migratable: "false"
+      nodeSelector: ""
+      numberOfReplicas: "3"
+      staleReplicaTimeout: "20"
+    volumeHandle: jellyfin-config
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: longhorn
+  volumeMode: Filesystem
 
 ---
 
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: jellyfin-config-claim
+  finalizers:
+  - kubernetes.io/pvc-protection
+  name: jellyfin-config
+  namespace: default
 spec:
-  storageClassName: longhorn
   accessModes:
-    - ReadWriteMany
+  - ReadWriteMany
   resources:
     requests:
       storage: 8Gi
+  storageClassName: longhorn
+  volumeMode: Filesystem
+  volumeName: jellyfin-config
+status:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 8Gi
+  phase: Bound
