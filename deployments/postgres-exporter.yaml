@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-exporter
+  labels:
+    app.kubernetes.io/name: postgres-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres-exporter
+  template:
+    metadata:
+      labels:
+        app: postgres-exporter
+    spec:
+      containers:
+      - env:
+          - name: DATA_SOURCE_URI
+            value: "postgres:5432?sslmode=disable"
+          - name: DATA_SOURCE_USER
+            valueFrom:
+              secretKeyRef:
+                name: postgres-creds
+                key: username
+          - name: DATA_SOURCE_PASS
+            valueFrom:
+              secretKeyRef:
+                name: postgres-creds
+                key: password
+        image: quay.io/prometheuscommunity/postgres-exporter
+        name: postgres-exporter
+        ports:
+        - containerPort: 9187
+          name: http
+          protocol: TCP
+      restartPolicy: Always
