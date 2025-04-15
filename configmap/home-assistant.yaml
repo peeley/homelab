@@ -11,6 +11,13 @@ data:
     script: !include scripts.yaml
     scene: !include scenes.yaml
 
+    homeassistant:
+      auth_providers:
+        - type: command_line
+          command: /config/ldap-auth.sh
+          args: ["http://lldap", "home_assistant", "home_assistant_admin", "home_assistant_local"]
+          meta: true
+
     # Nginx Proxy stuff
     http:
       server_port: 8123
