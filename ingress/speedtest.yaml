@@ -24,3 +24,7 @@ spec:
       port: speedtest-http
   tls:
     certResolver: myresolver
+    domains:
+      - main: "lab.janissary.xyz"
+        sans:
+          - "*.lab.janissary.xyz"

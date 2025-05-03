@@ -29,6 +29,3 @@ data:
       # Set this to your NGINX machine IP, or localhost if hosted on the same machine.
       trusted_proxies:
         - 0.0.0.0/0
-      # this is publicly exposed, so gotta have some sort of IP banning in place
-      ip_ban_enabled: true
-      login_attempts_threshold: 10

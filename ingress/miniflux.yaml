@@ -25,3 +25,7 @@ spec:
       port: miniflux-http
   tls:
     certResolver: myresolver
+    domains:
+      - main: "lab.janissary.xyz"
+        sans:
+          - "*.lab.janissary.xyz"
