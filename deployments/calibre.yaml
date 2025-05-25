@@ -27,7 +27,7 @@ spec:
             value: "1024"
           - name: PGID
             value: "100"
-        image: linuxserver/calibre-web:0.6.23
+        image: crocodilestick/calibre-web-automated:V3.0.4
         name: calibre
         ports:
         - containerPort: 8083
@@ -36,6 +36,6 @@ spec:
         volumeMounts:
         - mountPath: /config
           name: calibre-config
-        - mountPath: /books
+        - mountPath: /calibre-library
           name: calibre-books
       restartPolicy: Always
