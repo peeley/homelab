@@ -3,14 +3,29 @@ repositories:
   url: https://bitnami-labs.github.io/sealed-secrets
 - name: longhorn
   url: https://charts.longhorn.io
+- name: loki
+  url: https://grafana.github.io/helm-charts
 
 releases:
 - name: sealed-secrets
   namespace: kube-system
   chart: sealed-secrets/sealed-secrets
+
 - name: longhorn
   namespace: longhorn-system
   chart: longhorn/longhorn
   set:
     - name: defaultSettings.backupTarget
       value: nfs://hesiod.lab.janissary.xyz:/volume1/Media/Lab/backups
+
+- name: loki
+  namespace: loki
+  chart: grafana/loki
+  values:
+    - config/loki/values.yaml
+
+- name: alloy
+  namespace: loki
+  chart: grafana/alloy
+  values:
+    - config/alloy/values.yaml
