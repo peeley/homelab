@@ -1,0 +1,157 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: stirling-pdf-configs
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 500Mi
+  nfs:
+    path: /volume1/Media/Lab/stirling-pdf/configs
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: stirling-pdf-configs-claim
+spec:
+  storageClassName: nfs
+  volumeName: stirling-pdf-configs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 500Mi
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: stirling-pdf-logs
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 500Mi
+  nfs:
+    path: /volume1/Media/Lab/stirling-pdf/logs
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: stirling-pdf-logs-claim
+spec:
+  storageClassName: nfs
+  volumeName: stirling-pdf-logs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 500Mi
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: stirling-pdf-custom-files
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 500Mi
+  nfs:
+    path: /volume1/Media/Lab/stirling-pdf/customFiles
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: stirling-pdf-custom-files-claim
+spec:
+  storageClassName: nfs
+  volumeName: stirling-pdf-custom-files
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 500Mi
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: stirling-pdf-pipeline
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 500Mi
+  nfs:
+    path: /volume1/Media/Lab/stirling-pdf/pipeline
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: stirling-pdf-pipeline-claim
+spec:
+  storageClassName: nfs
+  volumeName: stirling-pdf-pipeline
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 500Mi
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: stirling-pdf-tessdata
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 500Mi
+  nfs:
+    path: /volume1/Media/Lab/stirling-pdf/tessdata
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: stirling-pdf-tessdata-claim
+spec:
+  storageClassName: nfs
+  volumeName: stirling-pdf-tessdata
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 500Mi

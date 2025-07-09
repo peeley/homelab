@@ -1,0 +1,30 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: stirling-pdf-ingress
+  labels:
+    app.kubernetes.io/name: stirling-pdf
+  annotations:
+    gethomepage.dev/href: "https://pdf.lab.janissary.xyz"
+    gethomepage.dev/icon: "stirling-pdf.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: PDF Tools
+    gethomepage.dev/group: Media
+    gethomepage.dev/name: Stirling PDF
+    gethomepage.dev/pod-selector: ""
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`pdf.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: stirling-pdf
+      port: stirling-pdf-http
+  tls:
+    certResolver: myresolver
+    domains:
+      - main: "lab.janissary.xyz"
+        sans:
+          - "*.lab.janissary.xyz"

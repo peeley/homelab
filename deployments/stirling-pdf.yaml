@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stirling-pdf-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stirling-pdf
+  template:
+    metadata:
+      labels:
+        app: stirling-pdf
+    spec:
+      volumes:
+      - name: stirling-pdf-configs
+        persistentVolumeClaim:
+          claimName: stirling-pdf-configs-claim
+      - name: stirling-pdf-pipeline
+        persistentVolumeClaim:
+          claimName: stirling-pdf-pipeline-claim
+      - name: stirling-pdf-logs
+        persistentVolumeClaim:
+          claimName: stirling-pdf-logs-claim
+      - name: stirling-pdf-custom-files
+        persistentVolumeClaim:
+          claimName: stirling-pdf-custom-files-claim
+      - name: stirling-pdf-tessdata
+        persistentVolumeClaim:
+          claimName: stirling-pdf-tessdata-claim
+      containers:
+      - env:
+          - name: TZ
+            value: "America/Los_Angeles"
+          - name: PUID
+            value: "1024"
+          - name: PGID
+            value: "100"
+          - name: DOCKER_ENABLE_SECURITY
+            value: "false"
+          - name: LANGS
+            value: "en_US"
+        image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
+        name: stirling-pdf
+        ports:
+        - containerPort: 8080
+          name: http-tcp
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /configs/
+          name: stirling-pdf-configs
+        - mountPath: /logs/
+          name: stirling-pdf-logs
+        - mountPath: /custom-files/
+          name: stirling-pdf-custom-files
+        - mountPath: /pipeline/
+          name: stirling-pdf-pipeline
+        - mountPath: /usr/share/tessdata/
+          name: stirling-pdf-tessdata
+      restartPolicy: Always
