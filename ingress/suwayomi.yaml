@@ -1,0 +1,30 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: suwayomi
+  annotations:
+    gethomepage.dev/href: "https://manga.lab.janissary.xyz"
+    gethomepage.dev/icon: "suwayomi.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Manga Library
+    gethomepage.dev/group: Media
+    gethomepage.dev/name: Suwayomi
+    gethomepage.dev/pod-selector: ""
+    gethomepage.dev/widget.type: "suwayomi"
+    gethomepage.dev/widget.url: "https://manga.lab.janissary.xyz"
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`manga.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: suwayomi
+      port: suwayomi-http
+  tls:
+    certResolver: myresolver
+    domains:
+      - main: "lab.janissary.xyz"
+        sans:
+          - "*.lab.janissary.xyz"

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: suwayomi
+  labels:
+    app.kubernetes.io/name: suwayomi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: suwayomi
+  template:
+    metadata:
+      labels:
+        app: suwayomi
+    spec:
+      volumes:
+      - name: suwayomi-manga
+        persistentVolumeClaim:
+          claimName: suwayomi-manga-claim
+      containers:
+      - env:
+          - name: TZ
+            value: America/Los_Angeles
+          - name: PUID
+            value: "1024"
+          - name: PGID
+            value: "100"
+          - name: FLARESOLVERR_ENABLED
+            value: "true"
+          - name: FLARESOLVERR_URL
+            value: "http://flaresolverr"
+        image: ghcr.io/suwayomi/tachidesk:v2.0.1833
+        name: suwayomi
+        ports:
+        - containerPort: 4567
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /home/suwayomi/.local/share/Tachidesk
+          name: suwayomi-manga
+      restartPolicy: Always
