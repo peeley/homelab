@@ -24,6 +24,14 @@ spec:
       - name: jellyfin-data
         persistentVolumeClaim:
           claimName: nfs-claim
+      - name: video-hardware-device
+        hostPath:
+          path: /dev/dri/renderD128
+      securityContext:
+        supplementalGroups:
+          - 303
+      nodeSelector:
+        video-hardware: "true"
       containers:
       - env:
           - name: TZ
@@ -54,4 +62,8 @@ spec:
           name: jellyfin-cache
         - mountPath: /data
           name: jellyfin-data
+        - mountPath: /dev/dri/renderD128
+          name: video-hardware-device
+        securityContext:
+          privileged: true
       restartPolicy: Always
