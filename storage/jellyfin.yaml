@@ -22,7 +22,7 @@ spec:
   accessModes:
   - ReadWriteMany
   capacity:
-    storage: 8Gi
+    storage: 16Gi
   claimRef:
     apiVersion: v1
     kind: PersistentVolumeClaim
@@ -56,7 +56,7 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 8Gi
+      storage: 16Gi
   storageClassName: longhorn
   volumeMode: Filesystem
   volumeName: jellyfin-config
@@ -64,5 +64,5 @@ status:
   accessModes:
   - ReadWriteMany
   capacity:
-    storage: 8Gi
+    storage: 16Gi
   phase: Bound
