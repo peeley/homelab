@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: flaresolverr
-          image: flaresolverr/flaresolverr:v3.3.21
+          image: flaresolverr/flaresolverr:v3.4.0
           env:
             - name: TZ
               value: "America/Los_Angeles"
