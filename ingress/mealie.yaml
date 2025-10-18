@@ -1,0 +1,32 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: mealie-ingress
+  annotations:
+    gethomepage.dev/href: "https://cooking.lab.janissary.xyz"
+    gethomepage.dev/icon: "mealie.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Meal Planner
+    gethomepage.dev/group: Media
+    gethomepage.dev/name: Mealie
+    gethomepage.dev/pod-selector: ""
+    gethomepage.dev/widget.type: "mealie"
+    gethomepage.dev/widget.url: "https://cooking.lab.janissary.xyz"
+    # gethomepage.dev/widget.username: "" TODO figure out how to grab this value from secret
+    # gethomepage.dev/widget.password: ""
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`cooking.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: mealie
+      port: mealie-http
+  tls:
+    certResolver: myresolver
+    domains:
+      - main: "lab.janissary.xyz"
+        sans:
+          - "*.lab.janissary.xyz"
