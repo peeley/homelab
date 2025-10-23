@@ -40,7 +40,7 @@ spec:
             value: "1024"
           - name: PGID
             value: "100"
-        image: linuxserver/jellyfin:10.10.7
+        image: linuxserver/jellyfin:10.11.0
         name: jellfyin
         ports:
         - containerPort: 8096
