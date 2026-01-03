@@ -21,7 +21,7 @@ spec:
             claimName: nfs-claim
       containers:
         - name: sonarr
-          image: linuxserver/sonarr:4.0.14
+          image: linuxserver/sonarr:4.0.16
           env:
             - name: TZ
               value: "America/Los_Angeles"
