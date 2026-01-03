@@ -50,7 +50,7 @@ spec:
             value: https://auth.janissary.xyz
           - name: OAUTH2_USER_CREATION
             value: "1"
-        image: docker.io/miniflux/miniflux:2.1.4
+        image: docker.io/miniflux/miniflux:2.2.14
         name: miniflux
         ports:
         - containerPort: 8080
