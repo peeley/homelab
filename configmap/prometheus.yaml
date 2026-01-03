@@ -42,5 +42,6 @@ data:
               - "athena.lab.janissary.xyz:9155" # coredns
               - "anubis.lab.janissary.xyz:9000"
               - "osiris.lab.janissary.xyz:9000"
+              - "seth.lab.janissary.xyz:9000"
               - "kube-state-metrics:8080"
               - "postgres-exporter:9187"
