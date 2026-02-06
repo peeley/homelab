@@ -1,0 +1,27 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: sabnzbd
+  annotations:
+    gethomepage.dev/href: "https://usenet.lab.janissary.xyz"
+    gethomepage.dev/icon: "sabnzbd.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: Usenet Download Client
+    gethomepage.dev/group: Downloads
+    gethomepage.dev/name: sabnzbd
+    gethomepage.dev/pod-selector: ""
+    gethomepage.dev/widget.type: "sabnzbd"
+    gethomepage.dev/widget.url: "https://usenet.lab.janissary.xyz"
+    # gethomepage.dev/widget.key: "" TODO figure out how to grab this value from secret
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`usenet.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: sabnzbd-service
+      port: sabnzbd-http
+  tls:
+    certResolver: myresolver

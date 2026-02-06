@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sabnzbd
+  labels:
+    app.kubernetes.io/name: sabnzbd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sabnzbd
+  template:
+    metadata:
+      labels:
+        app: sabnzbd
+    spec:
+      volumes:
+      - name: sabnzbd-config
+        persistentVolumeClaim:
+          claimName: sabnzbd-config-claim
+      - name: sabnzbd-data
+        persistentVolumeClaim:
+          claimName: nfs-claim
+      containers:
+      - env:
+          - name: TZ
+            value: America/Los_Angeles
+          - name: PUID
+            value: "1024"
+          - name: PGID
+            value: "100"
+          - name: WEBUI_PORTS
+            value: "8080/tcp"
+        image: ghcr.io/hotio/sabnzbd:latest
+        name: sabnzbd
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /config
+          name: sabnzbd-config
+        - mountPath: /data
+          name: sabnzbd-data
+      restartPolicy: Always
