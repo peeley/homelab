@@ -21,7 +21,7 @@ spec:
             claimName: nfs-claim
       containers:
         - name: prowlarr
-          image: hotio/prowlarr:release
+          image: lscr.io/linuxserver/prowlarr:2.3.0
           env:
             - name: TZ
               value: "America/Los_Angeles"
