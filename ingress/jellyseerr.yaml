@@ -23,9 +23,4 @@ spec:
     services:
     - name: jellyseerr
       port: jellyseerr-http
-  tls:
-    certResolver: myresolver
-    domains:
-      - main: "lab.janissary.xyz"
-        sans:
-          - "*.lab.janissary.xyz"
+  tls: {}

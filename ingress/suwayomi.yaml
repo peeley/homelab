@@ -22,9 +22,4 @@ spec:
     services:
     - name: suwayomi
       port: suwayomi-http
-  tls:
-    certResolver: myresolver
-    domains:
-      - main: "lab.janissary.xyz"
-        sans:
-          - "*.lab.janissary.xyz"
+  tls: {}

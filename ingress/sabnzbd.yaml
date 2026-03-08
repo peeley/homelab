@@ -23,5 +23,4 @@ spec:
     services:
     - name: sabnzbd-service
       port: sabnzbd-http
-  tls:
-    certResolver: myresolver
+  tls: {}

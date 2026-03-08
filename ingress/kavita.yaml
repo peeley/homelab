@@ -24,9 +24,4 @@ spec:
     services:
     - name: kavita-service
       port: kavita-http
-  tls:
-    certResolver: myresolver
-    domains:
-      - main: "lab.janissary.xyz"
-        sans:
-          - "*.lab.janissary.xyz"
+  tls: {}

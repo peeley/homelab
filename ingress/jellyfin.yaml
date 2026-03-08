@@ -26,9 +26,4 @@ spec:
     services:
     - name: jellyfin
       port: jellyfin-http
-  tls:
-    certResolver: myresolver
-    domains:
-      - main: "lab.janissary.xyz"
-        sans:
-          - "*.lab.janissary.xyz"
+  tls: {}

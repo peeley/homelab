@@ -22,9 +22,4 @@ spec:
     services:
     - name: stirling-pdf
       port: stirling-pdf-http
-  tls:
-    certResolver: myresolver
-    domains:
-      - main: "lab.janissary.xyz"
-        sans:
-          - "*.lab.janissary.xyz"
+  tls: {}

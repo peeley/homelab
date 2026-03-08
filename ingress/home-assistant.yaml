@@ -24,9 +24,4 @@ spec:
     services:
     - name: home-assistant-service
       port: home-assistant-http
-  tls:
-    certResolver: myresolver
-    domains:
-      - main: "lab.janissary.xyz"
-        sans:
-          - "*.lab.janissary.xyz"
+  tls: {}

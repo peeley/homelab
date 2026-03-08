@@ -20,9 +20,4 @@ spec:
     services:
     - name: synapse
       port: synapse-http
-  tls:
-    certResolver: myresolver
-    domains:
-      - main: "lab.janissary.xyz"
-        sans:
-          - "*.lab.janissary.xyz"
+  tls: {}

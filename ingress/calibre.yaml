@@ -24,9 +24,4 @@ spec:
     services:
     - name: calibre-service
       port: calibre-http
-  tls:
-    certResolver: myresolver
-    domains:
-      - main: "lab.janissary.xyz"
-        sans:
-          - "*.lab.janissary.xyz"
+  tls: {}
