@@ -66,4 +66,13 @@ spec:
           name: video-hardware-device
         securityContext:
           privileged: true
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8096
+          initialDelaySeconds: 90
+          periodSeconds: 15
+          timeoutSeconds: 15
+          failureThreshold: 5
       restartPolicy: Always
+
