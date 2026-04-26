@@ -35,8 +35,9 @@ spec:
       diskSelector: ""
       migratable: "false"
       nodeSelector: ""
-      numberOfReplicas: "3"
+      numberOfReplicas: "2"
       staleReplicaTimeout: "20"
+      dataLocality: "best-effort"
     volumeHandle: jellyfin-config
   persistentVolumeReclaimPolicy: Retain
   storageClassName: longhorn
