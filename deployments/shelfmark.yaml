@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shelfmark
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shelfmark
+  template:
+    metadata:
+      labels:
+        app: shelfmark
+    spec:
+      volumes:
+        - name: shelfmark-config
+          persistentVolumeClaim:
+            claimName: shelfmark-config-claim
+        - name: shelfmark-data
+          persistentVolumeClaim:
+            claimName: nfs-claim
+        - name: book-ingest
+          persistentVolumeClaim:
+            claimName: book-ingest-claim
+      containers:
+        - name: qbittorrent
+          image: ghcr.io/calibrain/shelfmark:v1.3.0
+          env:
+            - name: TZ
+              value: "America/Los_Angeles"
+            - name: PUID
+              value: "1024"
+            - name: PGID
+              value: "100"
+          volumeMounts:
+          - mountPath: /config
+            name: shelfmark-config
+          - mountPath: /books
+            name: book-ingest
+          - mountPath: /data/torrents
+            subPath: Torrents
+            name: shelfmark-data
+          ports:
+          - containerPort: 8084
+            name: http
+            protocol: TCP

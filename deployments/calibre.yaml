@@ -19,6 +19,9 @@ spec:
       - name: calibre-books
         persistentVolumeClaim:
           claimName: calibre-books-claim
+      - name: book-ingest
+        persistentVolumeClaim:
+          claimName: book-ingest-claim
       containers:
       - env:
           - name: TZ
@@ -38,4 +41,6 @@ spec:
           name: calibre-config
         - mountPath: /calibre-library
           name: calibre-books
+        - mountPath: /cwa-book-ingest
+          name: book-ingest
       restartPolicy: Always

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: shelfmark
+spec:
+  selector:
+    app: shelfmark
+  type: NodePort
+  ports:
+  - name: shelfmark-http
+    protocol: TCP
+    port: 80
+    targetPort: http

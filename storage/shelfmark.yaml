@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: shelfmark-config
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  nfs:
+    path: /volume1/Media/Lab/shelfmark
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shelfmark-config-claim
+spec:
+  storageClassName: nfs
+  volumeName: shelfmark-config
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: book-ingest
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  nfs:
+    path: /volume1/Media/Lab/book-ingest
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: book-ingest-claim
+spec:
+  storageClassName: nfs
+  volumeName: book-ingest
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi

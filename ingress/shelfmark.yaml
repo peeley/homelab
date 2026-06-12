@@ -1,0 +1,23 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: shelfmark
+  annotations:
+    gethomepage.dev/href: "https://shelfmark.lab.janissary.xyz"
+    gethomepage.dev/icon: "shelfmark.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: eBook Downloader
+    gethomepage.dev/group: Downloads
+    gethomepage.dev/name: Shelfmark
+    gethomepage.dev/pod-selector: ""
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`shelfmark.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: shelfmark
+      port: shelfmark-http
+  tls: {}
