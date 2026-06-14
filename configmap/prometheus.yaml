@@ -45,3 +45,4 @@ data:
               - "seth.lab.janissary.xyz:9000"
               - "kube-state-metrics:8080"
               - "postgres-exporter:9187"
+              - "jellyfin:8096"
