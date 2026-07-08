@@ -30,7 +30,7 @@ spec:
             value: "1024"
           - name: PGID
             value: "100"
-        image: crocodilestick/calibre-web-automated:V3.1.1
+        image: crocodilestick/calibre-web-automated:v4.0.6
         name: calibre
         ports:
         - containerPort: 8083
