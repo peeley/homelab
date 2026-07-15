@@ -1,2 +1,6 @@
 secrets/*
 .env
+
+# Terraform
+terraform/.terraform/
+terraform/terraform.*
