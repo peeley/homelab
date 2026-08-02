@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookorbit
+spec:
+  selector:
+    app: bookorbit
+  type: NodePort
+  ports:
+  - name: bookorbit-http
+    protocol: TCP
+    port: 80
+    targetPort: http-tcp

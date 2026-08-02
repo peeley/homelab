@@ -1,0 +1,23 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: bookorbit
+  annotations:
+    gethomepage.dev/href: "https://bookorbit.lab.janissary.xyz"
+    gethomepage.dev/icon: "bookorbit.png"
+    gethomepage.dev/enabled: "true"
+    gethomepage.dev/description: eBook Library
+    gethomepage.dev/group: Media
+    gethomepage.dev/name: Calibre
+    gethomepage.dev/pod-selector: ""
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+  - match: Host(`bookorbit.lab.janissary.xyz`)
+    kind: Rule
+    services:
+    - name: bookorbit
+      port: bookorbit-http
+  tls: {}

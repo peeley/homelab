@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: bookorbit-config
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  nfs:
+    path: /volume1/Media/Lab/bookorbit/config
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: bookorbit-books
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 8Ti
+  nfs:
+    path: /volume1/Media/Books
+    server: hesiod.lab.janissary.xyz
+    readOnly: false
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bookorbit-config-claim
+spec:
+  storageClassName: nfs
+  volumeName: bookorbit-config
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bookorbit-books-claim
+spec:
+  storageClassName: nfs
+  volumeName: bookorbit-books
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 8Ti

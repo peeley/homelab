@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookorbit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bookorbit
+  template:
+    metadata:
+      labels:
+        app: bookorbit
+    spec:
+      # needed to prevent env injection by Kubernetes, otherwise the
+      # `POSTGRES_HOST` env var is rewritten to `tcp://10.42...` and causes
+      # database URL parsing to break.
+      enableServiceLinks: false
+      volumes:
+      - name: bookorbit-config
+        persistentVolumeClaim:
+          claimName: bookorbit-config-claim
+      - name: bookorbit-books
+        persistentVolumeClaim:
+          claimName: bookorbit-books-claim
+      containers:
+      - env:
+          - name: TZ
+            value: America/Los_Angeles
+          - name: PUID
+            value: "1024"
+          - name: PGID
+            value: "100"
+          - name: POSTGRES_HOST
+            value: "postgres"
+          - name: POSTGRES_USER
+            value: "bookorbit"
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: bookorbit
+                key: password
+          - name: POSTGRES_DB
+            value: "bookorbit"
+          - name: APP_URL
+            value: "https://bookorbit.lab.janissary.xyz"
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: bookorbit
+                key: jwt
+          - name: SETUP_BOOTSTRAP_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: bookorbit
+                key: token
+        image: ghcr.io/bookorbit/bookorbit:2.3.0
+        name: bookorbit
+        ports:
+        - containerPort: 3000
+          name: http-tcp
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /data
+          name: bookorbit-config
+        - mountPath: /books
+          name: bookorbit-books
+      restartPolicy: Always
